@@ -38,15 +38,15 @@ const brandList = [
 ];
 
 document.addEventListener("DOMContentLoaded", function() { 
-   brandList.map((brand) => {
-        for (let key in brand) {
-            if (brand.hasOwnProperty(key)) {
-                let values = brand[key];
-                const list = document.querySelector('.brandlist a');
-                console.log(list);
-                //list.href = ''; 배열의 첫번째 요소
-                list.innerHTML = values;
-            }
-        }
+   brandList.map((b) => {
+        let href = b.href;
+        let brand = b.brand
+        const list = document.createElement('a');
+        list.href = href; 
+        list.innerHTML =  brand;
+        const ulTag = document.querySelector('.brandlist ul');
+        const liTag = document.createElement('li');
+        ulTag.appendChild(liTag);
+        const result = liTag.appendChild(list);
     });
 });
