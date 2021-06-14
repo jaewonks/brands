@@ -1,0 +1,16 @@
+* {
+  list-style: none
+}
+.flex-container {
+    display: flex;
+    margin-top:50px;
+  }
+.alphabet {
+  height:50px;
+  line-height:50px;
+}
+.alphabet ul li {
+    margin-right: 30px;
+    font-size: 15px;
+    float: left;
+}
