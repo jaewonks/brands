@@ -38,7 +38,11 @@ const brandList = [
 ];
 
 document.addEventListener("DOMContentLoaded", function() { 
-   brandList.map((b) => {
+    const alphabet = document.querySelectorAll('.alphabet ul li');
+    Array.from(alphabet).map((a) => a.addEventListener('click', () => {
+        console.log(a.innerHTML);
+    }));
+    brandList.map((b) => {
         let href = b.href;
         let brand = b.brand
         const list = document.createElement('a');
@@ -49,4 +53,6 @@ document.addEventListener("DOMContentLoaded", function() {
         ulTag.appendChild(liTag);
         const result = liTag.appendChild(list);
     });
+
+
 });
