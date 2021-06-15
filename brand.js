@@ -8,6 +8,15 @@ const brandList = [
     { href: "javascript:void(0)", brand: "Chloé" },
     { href: "javascript:void(0)", brand: "Dior"},
     { href: "javascript:void(0)", brand: "Loro Piana"},
+    { href: "/product/list.html?cate_no=117", brand: "Celine" },
+    { href: "/product/list.html?cate_no=118", brand: "YSL" },
+    { href: "/product/list.html?cate_no=119", brand: "Burberry" },
+    { href: "javascript:void(0)", brand: "Balenciaga"},
+    { href: "/product/list.html?cate_no=121", brand: "Valentino" },
+    { href: "/product/list.html?cate_no=120", brand: "Gucci" },
+    { href: "javascript:void(0)", brand: "Chloé" },
+    { href: "javascript:void(0)", brand: "Dior"},
+    { href: "javascript:void(0)", brand: "Loro Piana"},
     { href: "javascript:void(0)", brand: "Loewe" },
     { href: "javascript:void(0)", brand: "Roger Vivier" },
     { href: "/product/list.html?cate_no=123", brand: "Louis Vuitton" },
@@ -35,24 +44,50 @@ const brandList = [
     { href: "javascript:void(0)", brand: "Belluti"},
     { href: "javascript:void(0)", brand: "option"},
     { href: "javascript:void(0)", brand: "Isabella Marang"},
-];
+ ];
+  
+ document.addEventListener("DOMContentLoaded", function() {
+    function target(arg) {
+        arg.map((b) => {
+            let href = b.href;
+            let brand = b.brand
+            const list = document.createElement('a');
+            list.href = href;
+            list.innerHTML =  brand;
+            const ulTag = document.querySelector('.brandlist ul');
+            const liTag = document.createElement('li');
+            ulTag.appendChild(liTag);
+            liTag.appendChild(list);
+        });
+    }
 
-document.addEventListener("DOMContentLoaded", function() { 
+    target(brandList);
+    
+    Object.filter = function(mainObject, filterFunction){
+        return Object.keys(mainObject)
+                .filter( function(ObjectKey){
+                  return filterFunction(mainObject[ObjectKey])
+                } )
+                .reduce( function (result, ObjectKey){
+                  result[ObjectKey] = mainObject[ObjectKey];
+                  return result;
+                }, []);
+    }
+   
     const alphabet = document.querySelectorAll('.alphabet ul li');
+  
     Array.from(alphabet).map((a) => a.addEventListener('click', () => {
-        console.log(a.innerHTML);
+        let allLis = document.querySelectorAll('.brandlist li');
+        Array.from(allLis).map((li) => li.remove());
+        let targetSubjects = Object.filter(brandList, (b) => {
+            if(a.innerHTML === 'ALL') {
+                return brandList;
+            }
+            let str = b.brand;
+            let first_char = str.charAt(0);
+            return first_char === a.innerHTML;
+        });
+        target(targetSubjects);
     }));
-    brandList.map((b) => {
-        let href = b.href;
-        let brand = b.brand
-        const list = document.createElement('a');
-        list.href = href; 
-        list.innerHTML =  brand;
-        const ulTag = document.querySelector('.brandlist ul');
-        const liTag = document.createElement('li');
-        ulTag.appendChild(liTag);
-        const result = liTag.appendChild(list);
-    });
-
-
-});
+ });
+  
